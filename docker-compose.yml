@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  talabat-api:
+    build:
+      context: .
+      dockerfile: Talabat.APIs/Dockerfile
+    ports:
+      - "5154:80"
+      - "7062:443"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
+    restart: always
